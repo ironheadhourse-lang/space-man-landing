@@ -28,7 +28,7 @@
     section{padding:88px 0;border-bottom:1px solid var(--soft)}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:34px}.kicker{color:var(--pink);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:700}h2{font-size:clamp(32px,5vw,62px);line-height:.98;margin:8px 0 0;text-transform:uppercase;letter-spacing:.04em}.lead{max-width:570px;color:var(--muted);font-size:17px}
     .grid{display:grid;gap:18px}.cols-2{grid-template-columns:1.15fr .85fr}.cols-3{grid-template-columns:repeat(3,1fr)}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));padding:24px;position:relative;overflow:hidden}.card:before{content:"";position:absolute;left:0;top:0;width:60px;height:2px;background:var(--pink)}.card h3{margin:0 0 12px;font-size:18px;text-transform:uppercase;letter-spacing:.09em}.card p{margin:0;color:var(--muted)}.tagrow{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.tag{border:1px solid var(--line);padding:7px 9px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.09em;background:rgba(0,0,0,.25)}
     .feature{display:grid;grid-template-columns:46px 1fr;gap:15px}.num{height:46px;border:1px solid var(--line);display:grid;place-items:center;color:var(--pink);font-weight:800}.media{border:1px solid var(--line);background:#08090b;overflow:hidden}.media img{width:100%;height:100%;object-fit:cover;transition:transform .5s;cursor:zoom-in}.media:hover img{transform:scale(1.025)}.caption{padding:12px 14px;color:var(--muted);font-size:13px;border-top:1px solid var(--soft)}
-    .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.gallery .media{min-height:260px}.span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+    .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.gallery .media{min-height:260px}.span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
     .loop{counter-reset:step}.step{display:grid;grid-template-columns:42px 1fr;gap:16px;align-items:start;padding:18px;border-bottom:1px solid var(--soft)}.step:last-child{border-bottom:none}.step:before{counter-increment:step;content:counter(step, decimal-leading-zero);color:var(--pink);font-weight:800;letter-spacing:.1em}.step b{display:block;text-transform:uppercase;letter-spacing:.07em}.step span{color:var(--muted)}
     .status{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{border:1px solid var(--line);padding:20px;background:rgba(255,255,255,.04)}.metric strong{display:block;font-size:30px;color:var(--warn);line-height:1}.metric span{display:block;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:8px}
     .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.video-card video{width:100%;background:#000;border:1px solid var(--line)}.video-card .caption{border:1px solid var(--line);border-top:none}
@@ -38,20 +38,62 @@
     .image-lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,.88);backdrop-filter:blur(8px)}
     .image-lightbox.active{display:flex}.image-lightbox img{max-width:min(96vw,1800px);max-height:92vh;border:1px solid var(--line);box-shadow:0 0 60px rgba(0,0,0,.6);object-fit:contain;background:#000}.image-lightbox button{position:fixed;right:20px;top:18px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:#fff;width:44px;height:44px;font-size:26px;line-height:1;cursor:pointer}.image-lightbox button:hover{border-color:rgba(255,47,143,.75)}
 
-    /* Compact board layout: readable thumbnails, full image opens in lightbox. */
-    .board-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;align-items:start}
-    .board-card{grid-column:span 4;border:1px solid var(--line);background:#08090b;overflow:hidden}
+    /* Final fixed board layout: no sliced technical images. */
+    .board-grid{
+      display:grid;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+      gap:16px;
+      align-items:start;
+    }
+    .board-card{
+      grid-column:span 4;
+      border:1px solid var(--line);
+      background:#08090b;
+      overflow:hidden;
+      min-width:0;
+    }
     .board-card.wide{grid-column:span 6}
     .board-card.full{grid-column:span 12}
-    .board-card img{width:100%;height:auto;max-height:430px;object-fit:contain;background:#07080a;cursor:zoom-in;transition:transform .35s}
-    .board-card.wide img{max-height:440px}
-    .board-card.full img{max-height:620px}
-    .board-card:hover img{transform:scale(1.01)}
-    .board-card .caption{padding:11px 13px;color:var(--muted);font-size:13px;border-top:1px solid var(--soft)}
-    .story-note{border:1px solid var(--line);background:rgba(255,255,255,.035);padding:18px;color:var(--muted);margin-bottom:16px}
+    .board-card img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-height:520px;
+      object-fit:contain;
+      background:#07080a;
+      cursor:zoom-in;
+    }
+    .board-card.full img{max-height:680px}
+    .board-card .caption{
+      padding:11px 13px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      border-top:1px solid var(--soft);
+    }
+    .story-note{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.035);
+      padding:16px 18px;
+      color:var(--muted);
+      margin-bottom:16px;
+      line-height:1.6;
+    }
     .story-note b{color:#fff;text-transform:uppercase;letter-spacing:.08em}
-    #encounters .board-card.full img{max-height:560px}
-    @media(max-width:900px){.links{display:none}.cols-2,.cols-3,.video-grid,.status{grid-template-columns:1fr}.section-head{display:block}.gallery,.board-grid{grid-template-columns:1fr}.span-7,.span-6,.span-5,.span-4,.span-8,.span-12,.board-card,.board-card.wide,.board-card.full{grid-column:auto}.hero-content{padding:80px 0 70px}.wrap{width:min(var(--max),calc(100% - 26px))}}
+    #encounters .board-card,
+    #encounters .board-card.wide,
+    #encounters .board-card.full{
+      grid-column:span 12 !important;
+    }
+    #encounters .board-card img{
+      width:100% !important;
+      height:auto !important;
+      object-fit:contain !important;
+      max-height:none !important;
+    }
+    #storyboards .board-card.wide{grid-column:span 6}
+    #storyboards .board-card.full{grid-column:span 12}
+    @media(max-width:900px){.links{display:none}.cols-2,.cols-3,.video-grid,.status{grid-template-columns:1fr}.section-head{display:block}.gallery,.board-grid{grid-template-columns:1fr}.span-7,.span-5,.span-4,.span-8,.span-12{grid-column:auto}.hero-content{padding:80px 0 70px}.wrap{width:min(var(--max),calc(100% - 26px))}}
   </style>
 </head>
 <body>
@@ -153,12 +195,12 @@
     <div class="section-head"><div><div class="kicker">Encounters / anomalies / crafting</div><h2>RPG encounters, anomalies and survival resources.</h2></div><p class="lead">This section is organized as pitch documentation: the player scans corridors, identifies threats, chooses turn-based actions, can escape back into stealth, and converts collected samples into survival supplies.</p></div>
     <div class="story-note"><b>Purpose:</b> show the gameplay layer clearly without pretending it is already a finished vertical slice. Each board opens fullscreen when clicked.</div>
     <div class="board-grid">
-      <div class="board-card wide"><img src="assets/images/corridor-scan-encounter-board.webp" alt="Space Man corridor scan and encounter concept board"><div class="caption">01 — Corridor scan: drone exploration, resource trace detection and transition into a hostile encounter.</div></div>
-      <div class="board-card wide"><img src="assets/images/turn-based-combat-escape-board.webp" alt="Space Man turn-based combat and escape system board"><div class="caption">02 — Combat / escape: turn-based actions can branch back into stealth through smoke, hiding and line-of-sight breaks.</div></div>
-      <div class="board-card wide"><img src="assets/images/encounter-field-interaction-v1.webp" alt="Turn-based encounter field interaction concept board version one"><div class="caption">03 — Basic encounter: scan, gather, attack or defend with drone support.</div></div>
-      <div class="board-card wide"><img src="assets/images/encounter-field-interaction-v2.webp" alt="Turn-based encounter field interaction concept board version two"><div class="caption">04 — Organic encounter variant with stronger anomaly pressure and AP-driven tactical choices.</div></div>
-      <div class="board-card wide"><img src="assets/images/alarm-systems-smoke-anomalies.webp" alt="Alarm systems and smoke anomalies concept dossier"><div class="caption">05 — Smoke anomaly alarm state: cameras, lockdown signs, warning devices and hostile smoke forms.</div></div>
-      <div class="board-card wide"><img src="assets/images/alarm-systems-amorphous-anomalies.webp" alt="Alarm systems and amorphous anomalies concept dossier"><div class="caption">06 — Amorphous anomaly set: organic enemies connected to contaminated corridors and security escalation.</div></div>
+      <div class="board-card full"><img src="assets/images/corridor-scan-encounter-board.webp" alt="Space Man corridor scan and encounter concept board"><div class="caption">01 — Corridor scan: drone exploration, resource trace detection and transition into a hostile encounter.</div></div>
+      <div class="board-card full"><img src="assets/images/turn-based-combat-escape-board.webp" alt="Space Man turn-based combat and escape system board"><div class="caption">02 — Combat / escape: turn-based actions can branch back into stealth through smoke, hiding and line-of-sight breaks.</div></div>
+      <div class="board-card full"><img src="assets/images/encounter-field-interaction-v1.webp" alt="Turn-based encounter field interaction concept board version one"><div class="caption">03 — Basic encounter: scan, gather, attack or defend with drone support.</div></div>
+      <div class="board-card full"><img src="assets/images/encounter-field-interaction-v2.webp" alt="Turn-based encounter field interaction concept board version two"><div class="caption">04 — Organic encounter variant with stronger anomaly pressure and AP-driven tactical choices.</div></div>
+      <div class="board-card full"><img src="assets/images/alarm-systems-smoke-anomalies.webp" alt="Alarm systems and smoke anomalies concept dossier"><div class="caption">05 — Smoke anomaly alarm state: cameras, lockdown signs, warning devices and hostile smoke forms.</div></div>
+      <div class="board-card full"><img src="assets/images/alarm-systems-amorphous-anomalies.webp" alt="Alarm systems and amorphous anomalies concept dossier"><div class="caption">06 — Amorphous anomaly set: organic enemies connected to contaminated corridors and security escalation.</div></div>
       <div class="board-card full"><img src="assets/images/labyrinth-resource-crafting-guide.webp" alt="Labyrinth resource elements and scientific crafting guide"><div class="caption">07 — Crafting guide: scan preserved biological / technological samples and refine them into med items, drone energy and oxygen refills.</div></div>
     </div>
   </div></section>
@@ -174,18 +216,19 @@
   </div></section>
 
   <section id="storyboards"><div class="wrap">
-    <div class="section-head"><div><div class="kicker">Storytelling / mechanics boards</div><h2>Signal, entry, scan, lockdown.</h2></div><p class="lead">Hand-drawn boards are grouped as story and mechanic explanation panels. They are not mixed with production screenshots or technical dossiers.</p></div>
-    <div class="story-note"><b>Reading order:</b> signal received → station entry → drone scan → security detection → lockdown → gas / trap pressure → combat mood.</div>
+    <div class="section-head"><div><div class="kicker">Storytelling / mechanics boards</div><h2>Signal, entry, scan, lockdown.</h2></div><p class="lead">Updated story boards for the landing page: signal discovery, arrival at Facility 07, scan / locked access, emergency protocol, cryogenic storage, trap escape, exit and the deeper dream-state power-core mystery.</p></div>
+    <div class="story-note"><b>Reading order:</b> signal received → facility entry → scan / locked access → emergency protocol → cryogenic discovery → trap escape → manual access → exit → power-core mystery.</div>
     <div class="board-grid">
-      <div class="board-card"><img src="assets/images/story-planet-detected.webp" alt="Planet detected and habitable signal storyboard"><div class="caption">01 — Signal received / planet detected. Opening pitch board.</div></div>
-      <div class="board-card"><img src="assets/images/comic-door-access.webp" alt="Astronaut door access storyboard"><div class="caption">02 — Access door and first descent into the facility.</div></div>
-      <div class="board-card"><img src="assets/images/comic-drone-scan.webp" alt="Drone scan storyboard"><div class="caption">03 — Drone scan, hidden systems and locked power core access.</div></div>
-      <div class="board-card"><img src="assets/images/comic-camera-protocol.webp" alt="Security camera protocol storyboard"><div class="caption">04 — Surveillance device activation before full lockdown.</div></div>
-      <div class="board-card"><img src="assets/images/comic-security-lockdown.webp" alt="Security lockdown and camera detection storyboard"><div class="caption">05 — Security protocol active: cameras, lasers, closed routes and trap logic.</div></div>
-      <div class="board-card"><img src="assets/images/comic-gas-sequence.webp" alt="Gas escape sequence storyboard"><div class="caption">06 — Gas event and emergency escape pressure.</div></div>
-      <div class="board-card"><img src="assets/images/comic-action-trap.webp" alt="Action trap storyboard"><div class="caption">07 — Arcade trap moment with limited resources and one-shot tension.</div></div>
-      <div class="board-card wide"><img src="assets/images/combat-cameras-wide.webp" alt="Astronaut surrounded by AI security cameras"><div class="caption">08 — Combat mood: surrounded by AI camera entities.</div></div>
-      <div class="board-card"><img src="assets/images/combat-cameras-portrait.webp" alt="Astronaut fighting camera entities"><div class="caption">09 — Close encounter mood for anomaly/security battle screen.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-01-signal-entry.webp" alt="Signal, planet detected, facility entry and locked access board"><div class="caption">01 — Signal / entry / scan: the astronaut receives the habitable signal, reaches Facility 07 and finds the first locked access point.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-02-cryo-lockdown-trap.webp" alt="Cryogenic storage, alarm and trap escape board"><div class="caption">02 — Cryogenic storage and alert escalation: unknown organic samples, protocol activation, trap run and emergency exit.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-03-emergency-console.webp" alt="Emergency protocol console scene"><div class="caption">03 — Emergency protocol: manual access is required after the station blocks system restart.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-04-trap-run.webp" alt="Astronaut running through lethal trap corridor"><div class="caption">04 — Trap escape: arcade pressure state with saws, spikes, drone light and time-critical movement.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-05-manual-access.webp" alt="Manual access during trap escape"><div class="caption">05 — Manual access: the player reaches an override panel while the station remains in danger mode.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-06-emergency-exit.webp" alt="Emergency exit to the desert surface"><div class="caption">06 — Emergency exit: escape route back to the desert surface and temporary safety.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-07-cryo-storage.webp" alt="Cryogenic storage corridor with organic entities"><div class="caption">07 — Cryogenic storage: unknown organic forms are preserved inside station pods.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-08-action-panels.webp" alt="Action and exploration panels inside contaminated corridors"><div class="caption">08 — Contaminated corridor sequence: power offline, bio-system failure, scanning and emergency shutdown moments.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-09-neural-link.webp" alt="Neural link analysis and cryogenic storage system board"><div class="caption">09 — Neural link analysis: Facility 07 connects cryogenic storage, power-core logic and a sleep-state system.</div></div>
+      <div class="board-card wide"><img src="assets/images/story-new-10-dream-state.webp" alt="Dream-state cryogenic chamber story board"><div class="caption">10 — Deeper explanation: the power core and cryogenic pods point toward a collective dream-state mystery.</div></div>
     </div>
   </div></section>
 
