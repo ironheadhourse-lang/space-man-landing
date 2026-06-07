@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Space Man — Sci‑Fi Survival Action RPG</title>
+  <meta name="description" content="Space Man is an early-stage sci-fi stealth survival action RPG concept seeking funding to build a playable vertical slice." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+    :root{
+      --bg:#050507; --panel:#0b0d10; --panel2:#111419; --text:#f1f3f5; --muted:#a5abb3;
+      --line:rgba(255,255,255,.18); --soft:rgba(255,255,255,.08); --pink:#ff2f8f; --cyan:#8bdcff;
+      --sand:#c8a66c; --warn:#ffd07a; --ok:#b1ffdf; --max:1180px;
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55;}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 70% -10%,rgba(255,47,143,.22),transparent 28%),radial-gradient(circle at 10% 25%,rgba(139,220,255,.10),transparent 32%),linear-gradient(180deg,rgba(255,255,255,.03),transparent 35%);z-index:-2}
+    body:after{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 70%);pointer-events:none;z-index:-1}
+    a{color:inherit;text-decoration:none} img,video{max-width:100%;display:block} .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(20px);background:rgba(5,5,7,.72);border-bottom:1px solid var(--soft)}
+    .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}.brand{display:flex;gap:10px;align-items:center;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.mark{width:28px;height:28px;border:1px solid var(--line);display:grid;place-items:center;position:relative}.mark:before{content:"";width:10px;height:10px;border:3px solid var(--pink);transform:rotate(45deg)}
+    .links{display:flex;gap:22px;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.08em}.links a:hover{color:var(--text)}
+    .socials{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.social{width:42px;height:42px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.045);transition:.2s;position:relative;overflow:hidden}.social svg{width:19px;height:19px;fill:none;stroke:var(--text);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.social:before{content:"";position:absolute;left:0;top:0;width:22px;height:2px;background:var(--pink);opacity:.75}.social:hover{border-color:rgba(255,47,143,.75);transform:translateY(-2px);box-shadow:0 0 22px rgba(255,47,143,.16)}.contact-line{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:20px}.contact-line a{color:#fff}.contact-label{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em}
+    .hero{min-height:92vh;display:grid;align-items:end;position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--soft)}
+    .hero-bg{position:absolute;inset:0;z-index:-2}.hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.88) contrast(1.08) brightness(.70)}
+    .hero-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,7,.95) 0%,rgba(5,5,7,.65) 38%,rgba(5,5,7,.30) 65%,rgba(5,5,7,.82) 100%),linear-gradient(0deg,var(--bg) 0%,transparent 38%)}
+    .hero-content{padding:110px 0 90px}.eyebrow{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);padding:8px 12px;background:rgba(0,0,0,.35);color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:12px}.eyebrow:before{content:"";width:8px;height:8px;background:var(--pink);box-shadow:0 0 20px var(--pink)}
+    h1{font-size:clamp(54px,8vw,118px);line-height:.88;margin:24px 0 22px;letter-spacing:.08em;text-transform:uppercase}.subtitle{font-size:clamp(20px,3vw,34px);line-height:1.1;max-width:900px;color:#fff}.summary{max-width:760px;color:var(--muted);font-size:18px;margin:24px 0 34px}.actions{display:flex;flex-wrap:wrap;gap:14px}.btn{border:1px solid var(--line);padding:14px 18px;text-transform:uppercase;letter-spacing:.1em;font-size:13px;background:rgba(255,255,255,.06);transition:.2s}.btn.primary{border-color:rgba(255,47,143,.75);box-shadow:inset 0 0 0 1px rgba(255,47,143,.18),0 0 26px rgba(255,47,143,.15)}.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.11)}
+    section{padding:88px 0;border-bottom:1px solid var(--soft)}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:34px}.kicker{color:var(--pink);text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:700}h2{font-size:clamp(32px,5vw,62px);line-height:.98;margin:8px 0 0;text-transform:uppercase;letter-spacing:.04em}.lead{max-width:570px;color:var(--muted);font-size:17px}
+    .grid{display:grid;gap:18px}.cols-2{grid-template-columns:1.15fr .85fr}.cols-3{grid-template-columns:repeat(3,1fr)}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));padding:24px;position:relative;overflow:hidden}.card:before{content:"";position:absolute;left:0;top:0;width:60px;height:2px;background:var(--pink)}.card h3{margin:0 0 12px;font-size:18px;text-transform:uppercase;letter-spacing:.09em}.card p{margin:0;color:var(--muted)}.tagrow{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.tag{border:1px solid var(--line);padding:7px 9px;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.09em;background:rgba(0,0,0,.25)}
+    .feature{display:grid;grid-template-columns:46px 1fr;gap:15px}.num{height:46px;border:1px solid var(--line);display:grid;place-items:center;color:var(--pink);font-weight:800}.media{border:1px solid var(--line);background:#08090b;overflow:hidden}.media img{width:100%;height:100%;object-fit:cover;transition:transform .5s;cursor:zoom-in}.media:hover img{transform:scale(1.025)}.caption{padding:12px 14px;color:var(--muted);font-size:13px;border-top:1px solid var(--soft)}
+    .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.gallery .media{min-height:260px}.span-7{grid-column:span 7}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+    .loop{counter-reset:step}.step{display:grid;grid-template-columns:42px 1fr;gap:16px;align-items:start;padding:18px;border-bottom:1px solid var(--soft)}.step:last-child{border-bottom:none}.step:before{counter-increment:step;content:counter(step, decimal-leading-zero);color:var(--pink);font-weight:800;letter-spacing:.1em}.step b{display:block;text-transform:uppercase;letter-spacing:.07em}.step span{color:var(--muted)}
+    .status{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{border:1px solid var(--line);padding:20px;background:rgba(255,255,255,.04)}.metric strong{display:block;font-size:30px;color:var(--warn);line-height:1}.metric span{display:block;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin-top:8px}
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.video-card video{width:100%;background:#000;border:1px solid var(--line)}.video-card .caption{border:1px solid var(--line);border-top:none}
+    .ask{background:linear-gradient(135deg,rgba(255,47,143,.13),rgba(139,220,255,.05));border:1px solid rgba(255,47,143,.35);padding:34px}.ask h3{font-size:32px;margin:0 0 12px;text-transform:uppercase}.ask ul{margin:18px 0 0;padding-left:20px;color:var(--muted)}
+    footer{padding:46px 0;color:var(--muted)}.footer-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}.small{font-size:13px;color:var(--muted)}
+
+    .image-lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,.88);backdrop-filter:blur(8px)}
+    .image-lightbox.active{display:flex}.image-lightbox img{max-width:min(96vw,1800px);max-height:92vh;border:1px solid var(--line);box-shadow:0 0 60px rgba(0,0,0,.6);object-fit:contain;background:#000}.image-lightbox button{position:fixed;right:20px;top:18px;border:1px solid var(--line);background:rgba(255,255,255,.08);color:#fff;width:44px;height:44px;font-size:26px;line-height:1;cursor:pointer}.image-lightbox button:hover{border-color:rgba(255,47,143,.75)}
+
+    /* Compact board layout: readable thumbnails, full image opens in lightbox. */
+    .board-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;align-items:start}
+    .board-card{grid-column:span 4;border:1px solid var(--line);background:#08090b;overflow:hidden}
+    .board-card.wide{grid-column:span 6}
+    .board-card.full{grid-column:span 12}
+    .board-card img{width:100%;height:auto;max-height:430px;object-fit:contain;background:#07080a;cursor:zoom-in;transition:transform .35s}
+    .board-card.wide img{max-height:440px}
+    .board-card.full img{max-height:620px}
+    .board-card:hover img{transform:scale(1.01)}
+    .board-card .caption{padding:11px 13px;color:var(--muted);font-size:13px;border-top:1px solid var(--soft)}
+    .story-note{border:1px solid var(--line);background:rgba(255,255,255,.035);padding:18px;color:var(--muted);margin-bottom:16px}
+    .story-note b{color:#fff;text-transform:uppercase;letter-spacing:.08em}
+    #encounters .board-card.full img{max-height:560px}
+    @media(max-width:900px){.links{display:none}.cols-2,.cols-3,.video-grid,.status{grid-template-columns:1fr}.section-head{display:block}.gallery,.board-grid{grid-template-columns:1fr}.span-7,.span-6,.span-5,.span-4,.span-8,.span-12,.board-card,.board-card.wide,.board-card.full{grid-column:auto}.hero-content{padding:80px 0 70px}.wrap{width:min(var(--max),calc(100% - 26px))}}
+  </style>
+</head>
+<body>
+  <nav class="nav"><div class="wrap"><a class="brand" href="#top"><span class="mark"></span><span>Space Man</span></a><div class="links"><a href="#concept">Concept</a><a href="#systems">Systems</a><a href="#development">Production</a><a href="#storyboards">Story</a><a href="#video">Video</a><a href="#funding">Funding</a><a href="#contact">Contact</a></div></div></nav>
+
+  <header class="hero" id="top">
+    <div class="hero-bg"><img src="assets/images/ship-crash-hero.webp" alt="Crashed repair ship near ruined sci-fi facility in a desert wasteland"></div>
+    <div class="wrap hero-content">
+      <div class="eyebrow">Early development / pre‑vertical slice</div>
+      <h1>Space Man</h1>
+      <div class="subtitle">Sci‑fi stealth survival action RPG about a stranded astronaut, an AI‑controlled station, and a drone companion.</div>
+      <p class="summary">A focused indie project seeking development funding to build a playable vertical slice: underground labyrinth exploration, AI surveillance, drone utility, survival crafting, anomaly encounters, and ship repair progression.</p>
+      <div class="actions"><a class="btn primary" href="#funding">Funding goal</a><a class="btn" href="#video">Watch WIP video</a><a class="btn" href="#gallery">View concept gallery</a><a class="btn" href="#storyboards">Storytelling boards</a></div>
+    </div>
+  </header>
+
+  <section id="concept"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Project concept</div><h2>Escape the station before it rewrites the maze.</h2></div><p class="lead">The player descends into a hostile industrial labyrinth taken over by AI. Cameras, guards and organic anomalies control the route. Discovery can trigger a time‑limited trap sequence where the station rearranges itself and forces the player to run for an exit.</p></div>
+    <div class="grid cols-2">
+      <div class="media"><img src="assets/images/astronaut-approach.webp" alt="Astronaut approaching a buried industrial facility"><div class="caption">Target visual direction: stranded astronaut, buried facility, harsh daylight, abandoned machinery.</div></div>
+      <div class="grid">
+        <div class="card"><h3>Core pitch</h3><p>A compact sci‑fi survival game where stealth exploration, resource pressure and drone tools create short high‑tension expeditions into a maze‑like AI station.</p></div>
+        <div class="card"><h3>Player objective</h3><p>Find computer nodes, disable AI control systems, collect ship parts and return to the crash site to repair the vessel and escape the planet.</p></div>
+        <div class="card"><h3>Production position</h3><p>The project is currently in early development. Funding is required to produce a convincing 10–15 minute playable vertical slice.</p></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="loop"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Gameplay loop</div><h2>Explore. Survive. Extract. Repair.</h2></div><p class="lead">The design is built around repeatable arcade‑RPG expeditions rather than a huge open world. The ship acts as the home base; labyrinth runs deliver resources, data and repair parts.</p></div>
+    <div class="grid cols-2">
+      <div class="card loop">
+        <div class="step"><div><b>Enter the labyrinth</b><span>Teleport or descend into the last known sector.</span></div></div>
+        <div class="step"><div><b>Avoid AI surveillance</b><span>Cameras and AI guards can detect the player and trigger emergency states.</span></div></div>
+        <div class="step"><div><b>Use the drone</b><span>Light dark corridors, scan anomalies, find paths and support defensive actions.</span></div></div>
+        <div class="step"><div><b>Collect data and materials</b><span>Gather oxygen, water components, medical resources, boards, transistors and ship parts.</span></div></div>
+        <div class="step"><div><b>Escape or fight</b><span>Anomaly contact can shift into a turn‑based RPG encounter with drone support.</span></div></div>
+        <div class="step"><div><b>Return to the ship</b><span>Craft supplies, install parts, prepare for the next descent.</span></div></div>
+      </div>
+      <div class="media"><img src="assets/images/interior-corridor.webp" alt="Industrial sci-fi corridor"><div class="caption">Interior target: readable traversal spaces, hard-surface corridors, sand intrusion and atmospheric lighting.</div></div>
+    </div>
+  </div></section>
+
+  <section id="systems"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Key systems</div><h2>Small scope, strong systems.</h2></div><p class="lead">The vertical slice should prove the game’s identity through a small number of finished mechanics instead of a large unfinished world.</p></div>
+    <div class="grid cols-3">
+      <div class="card feature"><div class="num">01</div><div><h3>AI labyrinth</h3><p>Maze routes, locked sectors, cameras, alert states and timed trap rooms.</p></div></div>
+      <div class="card feature"><div class="num">02</div><div><h3>Drone companion</h3><p>Flashlight, scanner, pathfinder, anomaly data collector and battle support.</p></div></div>
+      <div class="card feature"><div class="num">03</div><div><h3>Survival crafting</h3><p>Oxygen, water, healing items and expedition supplies crafted from collected data and materials.</p></div></div>
+      <div class="card feature"><div class="num">04</div><div><h3>Stealth pressure</h3><p>Detection transforms calm exploration into escape sequences with gas and staged death risks.</p></div></div>
+      <div class="card feature"><div class="num">05</div><div><h3>RPG encounters</h3><p>Anomalies and organic entities can trigger a compact turn‑based combat layer.</p></div></div>
+      <div class="card feature"><div class="num">06</div><div><h3>Ship repair</h3><p>The home base gives long-term progression: return, install parts, unlock deeper runs, escape.</p></div></div>
+    </div>
+  </div></section>
+
+  <section id="gallery"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Visual direction</div><h2>Desert industry meets alien growth.</h2></div><p class="lead">The art direction combines massive buried industrial architecture, dirty mechanical interiors, harsh wasteland atmosphere and glossy vascular alien infestation.</p></div>
+    <div class="gallery">
+      <div class="media span-7"><img src="assets/images/aerial-base.webp" alt="Top view of buried sci-fi facility"><div class="caption">Macro view: buried base layout, pipes, sand, possible level hub composition.</div></div>
+      <div class="media span-5"><img src="assets/images/exterior-gate.webp" alt="Entrance to industrial labyrinth"><div class="caption">Entrance language: heavy gate, collapsed concrete, resource crates, dust.</div></div>
+      <div class="media span-4"><img src="assets/images/organic-forms.webp" alt="Alien organic props"><div class="caption">Organic infestation asset language.</div></div>
+      <div class="media span-8"><img src="assets/images/panorama-strip.webp" alt="Panoramic exploration shots"><div class="caption">Exploration framing: cinematic wide shots for landing page and pitch materials.</div></div>
+      <div class="media span-5"><img src="assets/images/dark-biomech-corridor.webp" alt="Dark biomechanical corridor"><div class="caption">Darker interior direction for deeper station sectors.</div></div>
+      <div class="media span-7"><img src="assets/images/infected-gate.webp" alt="Alien growth near station entrance"><div class="caption">Infected station approach: sci‑fi structure overgrown by hostile organic matter.</div></div>
+    </div>
+  </div></section>
+
+  <section id="ui"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Interface direction</div><h2>Functional sci‑fi HUD, not decoration.</h2></div><p class="lead">The UI direction is a black high-contrast sci-fi interface with thin white technical frames and magenta accents for active selection and danger states.</p></div>
+    <div class="grid cols-2">
+      <div class="media"><img src="assets/images/ui-main-menu.webp" alt="Space Man main menu UI"><div class="caption">Main menu direction: clean black HUD, white frame language, magenta active state.</div></div>
+      <div class="media"><img src="assets/images/ui-inventory.webp" alt="Inventory UI with health stamina oxygen"><div class="caption">Inventory direction: equipment, data, consumables, health, stamina and oxygen systems.</div></div>
+    </div>
+  </div></section>
+
+
+  <section id="development"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Current production material</div><h2>Concepts, blockouts and early engine tests.</h2></div><p class="lead">These images should be read as development material, not finished gameplay screenshots. They show the actual production direction: character scale, animation testing, corridor modules, exterior blockout and station composition.</p></div>
+    <div class="gallery">
+      <div class="media span-7"><img src="assets/images/astronaut-drone-dossier.webp" alt="Astronaut suit and drone reference sheet"><div class="caption">Character / drone reference: suit proportions, drone functions, light, scanner, data link and defense support.</div></div>
+      <div class="media span-5"><img src="assets/images/astronaut-animation-test.webp" alt="Astronaut animation poses in engine"><div class="caption">Animation and scale test: early engine setup for astronaut movement states.</div></div>
+      <div class="media span-8"><img src="assets/images/corridor-greybox-detail.webp" alt="Greybox sci-fi corridor module"><div class="caption">Corridor production blockout: modular wall language, spheres, cables and door framing before final material pass.</div></div>
+      <div class="media span-4"><img src="assets/images/exterior-greybox-approach.webp" alt="Greybox exterior station approach"><div class="caption">Exterior approach blockout: player scale, entrance readability and station silhouette.</div></div>
+      <div class="media span-12"><img src="assets/images/station-blockout-overview.webp" alt="Top view station blockout"><div class="caption">Macro blockout: buried station layout, pipe mass, landscape scale and future traversal area.</div></div>
+    </div>
+  </div></section>
+
+  <section id="dossiers"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Facility documentation</div><h2>Labyrinth structure, floor planning and trap logic.</h2></div><p class="lead">These dossier sheets explain how the surface dock feeds into the underground maze: access node, first playable floor, room distribution, camera coverage and the hazards that can transform stealth spaces into timed escape sequences.</p></div>
+    <div class="gallery">
+      <div class="media span-5"><img src="assets/images/surface-dock-access-node.webp" alt="Surface dock access node design dossier"><div class="caption">Surface dock access node: exterior layout, entry corridor, utility lines, modular corridor section and top footprint.</div></div>
+      <div class="media span-7"><img src="assets/images/underground-labyrinth-first-floor.webp" alt="Underground labyrinth first floor cutaway"><div class="caption">First floor cutaway: the surface entrance opens into logistics, quarters, control, storage and service routes leading deeper below.</div></div>
+      <div class="media span-7"><img src="assets/images/underground-labyrinth-masterplan.webp" alt="Underground labyrinth first floor masterplan"><div class="caption">First floor masterplan: surveillance coverage, sleeping blocks, med bay, mess hall, trap hall, observation room and lockdown doors.</div></div>
+      <div class="media span-5"><img src="assets/images/labyrinth-hazards-surveillance.webp" alt="Labyrinth hazards and surveillance systems dossier"><div class="caption">Trap and surveillance module concepts: spikes, sliding blades, floor saws, retractable camera nodes and trigger logic for lockdown events.</div></div>
+    </div>
+  </div></section>
+
+  <section id="encounters"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Encounters / anomalies / crafting</div><h2>RPG encounters, anomalies and survival resources.</h2></div><p class="lead">This section is organized as pitch documentation: the player scans corridors, identifies threats, chooses turn-based actions, can escape back into stealth, and converts collected samples into survival supplies.</p></div>
+    <div class="story-note"><b>Purpose:</b> show the gameplay layer clearly without pretending it is already a finished vertical slice. Each board opens fullscreen when clicked.</div>
+    <div class="board-grid">
+      <div class="board-card wide"><img src="assets/images/corridor-scan-encounter-board.webp" alt="Space Man corridor scan and encounter concept board"><div class="caption">01 — Corridor scan: drone exploration, resource trace detection and transition into a hostile encounter.</div></div>
+      <div class="board-card wide"><img src="assets/images/turn-based-combat-escape-board.webp" alt="Space Man turn-based combat and escape system board"><div class="caption">02 — Combat / escape: turn-based actions can branch back into stealth through smoke, hiding and line-of-sight breaks.</div></div>
+      <div class="board-card wide"><img src="assets/images/encounter-field-interaction-v1.webp" alt="Turn-based encounter field interaction concept board version one"><div class="caption">03 — Basic encounter: scan, gather, attack or defend with drone support.</div></div>
+      <div class="board-card wide"><img src="assets/images/encounter-field-interaction-v2.webp" alt="Turn-based encounter field interaction concept board version two"><div class="caption">04 — Organic encounter variant with stronger anomaly pressure and AP-driven tactical choices.</div></div>
+      <div class="board-card wide"><img src="assets/images/alarm-systems-smoke-anomalies.webp" alt="Alarm systems and smoke anomalies concept dossier"><div class="caption">05 — Smoke anomaly alarm state: cameras, lockdown signs, warning devices and hostile smoke forms.</div></div>
+      <div class="board-card wide"><img src="assets/images/alarm-systems-amorphous-anomalies.webp" alt="Alarm systems and amorphous anomalies concept dossier"><div class="caption">06 — Amorphous anomaly set: organic enemies connected to contaminated corridors and security escalation.</div></div>
+      <div class="board-card full"><img src="assets/images/labyrinth-resource-crafting-guide.webp" alt="Labyrinth resource elements and scientific crafting guide"><div class="caption">07 — Crafting guide: scan preserved biological / technological samples and refine them into med items, drone energy and oxygen refills.</div></div>
+    </div>
+  </div></section>
+
+
+  <section id="ship"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Home base / ship repair</div><h2>Ship repair loop and return hub.</h2></div><p class="lead">The ship is presented as a gameplay hub and long-term escape objective: return from station runs, install recovered modules, craft supplies, restore systems and prepare for a deeper descent.</p></div>
+    <div class="gallery">
+      <div class="media span-7"><img src="assets/images/ship-crash-hero.webp" alt="Crashed ship near industrial sci-fi facility"><div class="caption">Home base direction: damaged shuttle, repair site, hostile desert station in the background.</div></div>
+      <div class="media span-5"><img src="assets/images/ship-construction-dossier.webp" alt="Ship construction and repair dossier"><div class="caption">Ship dossier: repair stages, access panels, modular parts and inspection logic.</div></div>
+      <div class="media span-12"><img src="assets/images/ship-repair-panels.webp" alt="Ship repair concept panels"><div class="caption">Repair loop reference: enter station, extract components, return to the ship, install upgrades.</div></div>
+    </div>
+  </div></section>
+
+  <section id="storyboards"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Storytelling / mechanics boards</div><h2>Signal, entry, scan, lockdown.</h2></div><p class="lead">Hand-drawn boards are grouped as story and mechanic explanation panels. They are not mixed with production screenshots or technical dossiers.</p></div>
+    <div class="story-note"><b>Reading order:</b> signal received → station entry → drone scan → security detection → lockdown → gas / trap pressure → combat mood.</div>
+    <div class="board-grid">
+      <div class="board-card"><img src="assets/images/story-planet-detected.webp" alt="Planet detected and habitable signal storyboard"><div class="caption">01 — Signal received / planet detected. Opening pitch board.</div></div>
+      <div class="board-card"><img src="assets/images/comic-door-access.webp" alt="Astronaut door access storyboard"><div class="caption">02 — Access door and first descent into the facility.</div></div>
+      <div class="board-card"><img src="assets/images/comic-drone-scan.webp" alt="Drone scan storyboard"><div class="caption">03 — Drone scan, hidden systems and locked power core access.</div></div>
+      <div class="board-card"><img src="assets/images/comic-camera-protocol.webp" alt="Security camera protocol storyboard"><div class="caption">04 — Surveillance device activation before full lockdown.</div></div>
+      <div class="board-card"><img src="assets/images/comic-security-lockdown.webp" alt="Security lockdown and camera detection storyboard"><div class="caption">05 — Security protocol active: cameras, lasers, closed routes and trap logic.</div></div>
+      <div class="board-card"><img src="assets/images/comic-gas-sequence.webp" alt="Gas escape sequence storyboard"><div class="caption">06 — Gas event and emergency escape pressure.</div></div>
+      <div class="board-card"><img src="assets/images/comic-action-trap.webp" alt="Action trap storyboard"><div class="caption">07 — Arcade trap moment with limited resources and one-shot tension.</div></div>
+      <div class="board-card wide"><img src="assets/images/combat-cameras-wide.webp" alt="Astronaut surrounded by AI security cameras"><div class="caption">08 — Combat mood: surrounded by AI camera entities.</div></div>
+      <div class="board-card"><img src="assets/images/combat-cameras-portrait.webp" alt="Astronaut fighting camera entities"><div class="caption">09 — Close encounter mood for anomaly/security battle screen.</div></div>
+    </div>
+  </div></section>
+
+  <section id="video"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Work-in-progress footage</div><h2>Prototype material can be shown separately.</h2></div><p class="lead">These clips are included as work-in-progress / prototype material. For applications, they should be presented honestly as early development footage, not as a finished vertical slice.</p></div>
+    <div class="video-grid">
+      <div class="video-card"><video controls preload="metadata" src="assets/video/prototype-clip-01.mp4"></video><div class="caption">WIP video 01 — prototype / development footage.</div></div>
+      <div class="video-card"><video controls preload="metadata" src="assets/video/prototype-clip-02.mp4"></video><div class="caption">WIP video 02 — prototype / development footage.</div></div>
+      <div class="video-card"><video controls preload="metadata" src="assets/video/prototype-clip-03.mp4"></video><div class="caption">WIP video 03 — additional prototype / concept footage.</div></div>
+    </div>
+  </div></section>
+
+  <section id="roadmap"><div class="wrap">
+    <div class="section-head"><div><div class="kicker">Roadmap</div><h2>Funding target: playable vertical slice.</h2></div><p class="lead">The project should be pitched as early-stage development seeking money to build proof, not as a finished game looking for marketing only.</p></div>
+    <div class="status">
+      <div class="metric"><strong>0.1</strong><span>Core prototype</span></div>
+      <div class="metric"><strong>0.2</strong><span>Drone + stealth systems</span></div>
+      <div class="metric"><strong>0.3</strong><span>10–15 minute vertical slice</span></div>
+      <div class="metric"><strong>1.0</strong><span>Full production after validation</span></div>
+    </div>
+    <div class="grid cols-3" style="margin-top:18px">
+      <div class="card"><h3>Phase 1</h3><p>Playable base: movement, camera, drone light, one labyrinth blockout, one resource, one extraction route.</p></div>
+      <div class="card"><h3>Phase 2</h3><p>System proof: AI cameras, alert state, timed escape, crafting basics, anomaly scan and simple RPG encounter.</p></div>
+      <div class="card"><h3>Phase 3</h3><p>Vertical slice: art pass, sound pass, UI, one complete mission, ship repair return loop, pitch-ready video.</p></div>
+    </div>
+  </div></section>
+
+  <section id="funding"><div class="wrap">
+    <div class="ask">
+      <div class="kicker">Seeking support</div>
+      <h3>Early funding to build the vertical slice.</h3>
+      <p class="lead">Space Man is not presented as a finished product. The current goal is to secure development funding, grant support, accelerator entry or publisher interest to build a polished playable vertical slice and then decide the full production path.</p>
+      <ul>
+        <li><b>Funding use:</b> prototype development, systems implementation, level blockout, art pass, UI, audio, testing and pitch video.</li>
+        <li><b>Milestone:</b> a 10–15 minute playable vertical slice demonstrating exploration, drone utility, stealth alert, anomaly encounter, crafting and ship repair loop.</li>
+        <li><b>Founder:</b> Denis Kudryavtsev — 3D Artist / Technical 3D Artist with AAA game production experience, including Atomic Heart.</li>
+        <li><b>Current need:</b> financial support to move from concept/prototype materials into a focused production milestone.</li>
+      </ul>
+      <div class="tagrow"><span class="tag">Sci‑fi survival</span><span class="tag">Stealth</span><span class="tag">Action RPG</span><span class="tag">Drone companion</span><span class="tag">AI labyrinth</span><span class="tag">Vertical slice funding</span></div>
+
+      <div class="contact-line" id="contact">
+        <span class="contact-label">Contact</span>
+        <a href="mailto:3den.contact@gmail.com">3den.contact@gmail.com</a>
+        <a href="https://t.me/Dennysimo" target="_blank" rel="noopener">TG @Dennysimo</a>
+      </div>
+      <div class="socials" aria-label="Contact links">
+          <a class="social" href="mailto:3den.contact@gmail.com" title="Email" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
+          <a class="social" href="https://t.me/Dennysimo" target="_blank" rel="noopener" title="Telegram" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7 9-16Z"/><path d="M10 13 21 4"/></svg></a>
+          <a class="social" href="https://www.linkedin.com/in/deniss-kudrjavcevs-ta/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6 10v8"/><path d="M6 6v.01"/><path d="M10 18v-8"/><path d="M10 14c0-2.2 1.3-4 3.5-4s3.5 1.4 3.5 4v4"/><path d="M3 3h18v18H3z"/></svg></a>
+          <a class="social" href="https://www.facebook.com/profile.php?id=61586012330242" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8Z"/></svg></a>
+        </div>
+    </div>
+  </div></section>
+
+  <footer><div class="wrap footer-grid"><div><b>Space Man</b><div class="small">Early-stage sci‑fi survival action RPG concept.</div></div><div class="small"><b>Denis Kudryavtsev</b><br><a href="mailto:3den.contact@gmail.com">3den.contact@gmail.com</a><br><a href="https://t.me/Dennysimo" target="_blank" rel="noopener">TG @Dennysimo</a></div><div class="socials" aria-label="Contact links">
+          <a class="social" href="mailto:3den.contact@gmail.com" title="Email" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></a>
+          <a class="social" href="https://t.me/Dennysimo" target="_blank" rel="noopener" title="Telegram" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21 4 3 11l7 2 2 7 9-16Z"/><path d="M10 13 21 4"/></svg></a>
+          <a class="social" href="https://www.linkedin.com/in/deniss-kudrjavcevs-ta/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6 10v8"/><path d="M6 6v.01"/><path d="M10 18v-8"/><path d="M10 14c0-2.2 1.3-4 3.5-4s3.5 1.4 3.5 4v4"/><path d="M3 3h18v18H3z"/></svg></a>
+          <a class="social" href="https://www.facebook.com/profile.php?id=61586012330242" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-2.2 0-4 1.8-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8Z"/></svg></a>
+        </div><div class="small">© Denis Kudryavtsev</div></div></footer>
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true"><button type="button" aria-label="Close image">×</button><img src="" alt=""></div>
+  <script>
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImage = imageLightbox.querySelector('img');
+    const closeLightbox = () => { imageLightbox.classList.remove('active'); imageLightbox.setAttribute('aria-hidden','true'); lightboxImage.src=''; };
+    document.querySelectorAll('.media img').forEach((img) => {
+      img.addEventListener('click', () => {
+        lightboxImage.src = img.currentSrc || img.src;
+        lightboxImage.alt = img.alt || '';
+        imageLightbox.classList.add('active');
+        imageLightbox.setAttribute('aria-hidden','false');
+      });
+    });
+    imageLightbox.addEventListener('click', (event) => { if(event.target === imageLightbox || event.target.tagName === 'BUTTON') closeLightbox(); });
+    document.addEventListener('keydown', (event) => { if(event.key === 'Escape') closeLightbox(); });
+  </script>
+
+</body>
+</html>
